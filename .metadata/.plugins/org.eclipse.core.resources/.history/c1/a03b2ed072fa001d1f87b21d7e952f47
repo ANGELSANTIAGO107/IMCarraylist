@@ -1,0 +1,103 @@
+
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+public class Procesos {
+
+	ArrayList<String> Nombres = new ArrayList<String>();
+	ArrayList<Double> Estatura = new ArrayList<Double>();
+	ArrayList<Double> Peso = new ArrayList<Double>();
+	ArrayList<Double> IMC = new ArrayList<Double>();
+	ArrayList<String> Resultado = new ArrayList<String>();
+	ArrayList<String> Telefono = new ArrayList<String>();
+	String name;
+	Double total;
+	Double numestatura;
+	Double numpeso;
+
+	public void Iniciar() {
+		
+		
+		int opc = 0; 
+		int seguir = 0;
+		
+		do{
+		String menu = " MENU INDICE DE MASA CORPORAL \n";
+		menu+= "1. Ingresar Datos\n";
+		menu+= "2. Imprimir Datos\n";
+		menu+= "3. Buscar Un Usuario\n";
+		menu+= "4. Actualizar\n";
+		menu+= "5. Eliminar Usuario\n";
+		menu+= "6. Limpiar Lista\n";
+		
+		opc = Integer.parseInt(JOptionPane.showInputDialog(menu));
+		
+		switch (opc) {
+		case 1:
+			Ingresardatos();
+			break;
+		case 2:
+			if (name != null) {
+				imprimir();
+			}
+			break;
+
+		case 3:
+			break;
+		}
+		
+		seguir = Integer.parseInt(JOptionPane.showInputDialog(name + " si desea continuar en el programa 1 si desea salir oprima cualquier otra tecla"));
+		} while (seguir == 1 );
+		
+	}
+	
+	public void Ingresardatos() {
+		
+		name = JOptionPane.showInputDialog("Ingrese por favor el nombre del usuario");
+		Nombres.add(name);
+		numestatura = Double.parseDouble(JOptionPane.showInputDialog(name + " Ingrese por favor la estatura: "));
+		Estatura.add(numestatura);
+		numpeso = (Double.parseDouble(JOptionPane.showInputDialog(name + " Ingrese por favor El Peso: ")));
+		Peso.add(numpeso);
+		name = (JOptionPane.showInputDialog(name + " ingrese por favor su numero de telefono"));
+		Telefono.add(name);
+		Calcular();
+		
+		
+	}
+	
+	public void Calcular() {
+		
+		total = numpeso / (numestatura + numestatura);
+		IMC.add(total);
+		
+		if (total < 18) {
+			
+			Resultado.add(name + " usted tiene el peso demasiado bajo, consulte a su pediatra");
+		} else if (total >=18 && total <20) {
+			Resultado.add(name + " tiene su peso un poco bajo, consulte a su pediatra");
+		} else if (total >= 20 && total <27) {
+			Resultado.add(name + " felicidades tiene el peso ideal");
+		} else if (total >= 27 && total <30) {
+			Resultado.add(name + " usted tiene sobrepeso aun esta a tiempo, consulte a su pediatra");
+		} else if (total >= 30 && total < 35) {
+			Resultado.add(name + " tiene demasiado peso si quiere mejorar consulte a su pediatra");
+		} else if (total >=35 && total < 40) {
+			Resultado.add(name + " usted tiene el sobrepeso demasiado alto, consulte a su pediatra");
+		} else if (total >=40 ) {
+			Resultado.add(name + "tiene un peso extremadamente alto, no es saludable estar asi, tome medidas, consulte a su pediatra");
+		}
+		
+	}
+	
+	public void imprimir () {
+		System.out.println("NOMBRE---------------ESTATURA--------------PESO-------------RESULTADO------------TELEFONO");
+		for (int i = 0; i<Nombres.size(); i++ ) {
+			System.out.println(Nombres.get(i) + " -----" + Estatura.get(i) + "------" + Peso.get(i) + "-----" + Resultado.get(i) + "--------" + Telefono.get(i));
+		}
+		System.out.println("FIN DEL CALCULO DE " +name+" MUCHAS GRACIAS POR TU CONSULTA");
+	}
+	
+
+
+}
